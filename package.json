@@ -1,0 +1,16 @@
+{
+  "name": "workshop_wordpress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/digital-copilote-agency/workshop-wordpress_php",
+  "author": "MatthiasWanner <matthias.wanner@gmail.com>",
+  "license": "AGPL-3.0",
+  "private": false,
+  "scripts": {
+    "prettier": "prettier"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.18.7",
+    "prettier": "^2.6.2"
+  }
+}

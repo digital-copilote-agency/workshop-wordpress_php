@@ -1,0 +1,50 @@
+version: '3.9'
+services:
+  db:
+    image: mariadb:latest
+    restart: always
+    networks:
+      - wpsite
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    volumes:
+      - wp_workshop_data:/var/lib/mysql
+
+  adminer:
+    image: adminer:latest
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - wpsite
+    ports:
+      - 8080:8080
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:php8.1-apache
+    networks:
+      - wpsite
+    ports:
+      - 8000:80
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_TABLE_PREFIX: dcwk_
+    volumes:
+      - ./config/docker-uploads.ini:/usr/local/etc/php/conf.d/docker-uploads.ini
+      - ./starterkit_theme:/var/www/html/wp-content/themes/template_workshop
+      - ./starterkit_plugin:/var/www/html/wp-content/plugins/template_workshop
+
+networks:
+  wpsite: {}
+
+volumes:
+  wp_workshop_data: {}

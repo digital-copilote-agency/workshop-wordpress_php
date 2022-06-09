@@ -1,0 +1,10 @@
+{
+  "name": "dc/workshop_theme",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "WorkshopTheme\\": "src/"
+    }
+  },
+  "require": {}
+}

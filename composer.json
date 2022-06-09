@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "format": [
+      "phpcs -p --ignore=*/vendor/*,*/node_modules/* starterkit_plugin",
+      "phpcs -p --ignore=*/vendor/*,*/node_modules/* starterkit_theme"
+    ]
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "*"
+  }
+}
