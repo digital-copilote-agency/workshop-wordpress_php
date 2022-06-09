@@ -20,17 +20,16 @@
  * @subpackage Wpworkshop/includes
  * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
  */
-class Wpworkshop_Activator {
-
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function activate() {
-
-	}
-
+class Wpworkshop_Activator
+{
+  /**
+   * Short Description. (use period)
+   *
+   * Long Description.
+   *
+   * @since    1.0.0
+   */
+  public static function activate()
+  {
+  }
 }
