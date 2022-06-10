@@ -1,4 +1,9 @@
 <?php
+namespace Workshop\Core;
+
+use Workshop\Admin\WpWorkshopAdmin;
+use Workshop\Public\WpWorkshopPublic;
+
 
 /**
  * The file that defines the core plugin class
@@ -27,7 +32,7 @@
  * @subpackage Wpworkshop/includes
  * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
  */
-class Wpworkshop
+class WpWorkshop
 {
   /**
    * The loader that's responsible for maintaining and registering all hooks that power
@@ -99,34 +104,7 @@ class Wpworkshop
    */
   private function load_dependencies()
   {
-    /**
-     * The class responsible for orchestrating the actions and filters of the
-     * core plugin.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) .
-      'includes/class-wpworkshop-loader.php';
-
-    /**
-     * The class responsible for defining internationalization functionality
-     * of the plugin.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) .
-      'includes/class-wpworkshop-i18n.php';
-
-    /**
-     * The class responsible for defining all actions that occur in the admin area.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) .
-      'admin/class-wpworkshop-admin.php';
-
-    /**
-     * The class responsible for defining all actions that occur in the public-facing
-     * side of the site.
-     */
-    require_once plugin_dir_path(dirname(__FILE__)) .
-      'public/class-wpworkshop-public.php';
-
-    $this->loader = new Wpworkshop_Loader();
+    $this->loader = new WpWorkshopLoader();
   }
 
   /**
@@ -140,7 +118,7 @@ class Wpworkshop
    */
   private function set_locale()
   {
-    $plugin_i18n = new Wpworkshop_i18n();
+    $plugin_i18n = new WpWorkshopI18n();
 
     $this->loader->add_action(
       'plugins_loaded',
@@ -158,7 +136,7 @@ class Wpworkshop
    */
   private function define_admin_hooks()
   {
-    $plugin_admin = new Wpworkshop_Admin(
+    $plugin_admin = new WpWorkshopAdmin(
       $this->get_plugin_name(),
       $this->get_version()
     );
@@ -178,6 +156,12 @@ class Wpworkshop
       $plugin_admin,
       'addPluginAdminMenu'
     );
+
+    $this->loader->add_action(
+      'admin_init',
+      $plugin_admin,
+      'registerPluginSettings'
+    );
   }
 
   /**
@@ -189,7 +173,7 @@ class Wpworkshop
    */
   private function define_public_hooks()
   {
-    $plugin_public = new Wpworkshop_Public(
+    $plugin_public = new WpWorkshopPublic(
       $this->get_plugin_name(),
       $this->get_version()
     );

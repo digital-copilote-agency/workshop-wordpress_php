@@ -1,5 +1,6 @@
 <?php
 
+namespace Workshop\Admin;
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -20,7 +21,7 @@
  * @subpackage Wpworkshop/admin
  * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
  */
-class Wpworkshop_Admin
+class WpWorkshopAdmin
 {
   /**
    * The ID of this plugin.
@@ -134,8 +135,61 @@ class Wpworkshop_Admin
 
   public function displayPluginAdminPage()
   {
-    echo '<div class="wrap">';
-    echo '<h1>WP Workshop Plugin Page</h1>';
-    echo '</div>';
+    require_once plugin_dir_path(__FILE__) .
+      '../../admin/partials/wp-workshop-page-display.php';
+  }
+
+  public function registerPluginSettings()
+  {
+    $args = [
+      'show_in_rest' => true,
+      'default' => null,
+    ];
+
+    add_settings_section(
+      'send_parameter_section',
+      'Sending parameters',
+      [$this, 'sendParameterSectionHtml'],
+      'workshop_plugin_settings'
+    );
+    add_settings_field(
+      'dcwps_recipient_email',
+      'Recipient address',
+      fn() => $this->settingFieldHtml('dcwps_recipient_email'),
+      'workshop_plugin_settings',
+      'send_parameter_section'
+    );
+    add_settings_field(
+      'dcwps_recipient_firstname',
+      'Firstname',
+      fn() => $this->settingFieldHtml('dcwps_recipient_firstname'),
+      'workshop_plugin_settings',
+      'send_parameter_section'
+    );
+    register_setting(
+      'workshop_plugin_settings',
+      'dcwps_recipient_email',
+      $args
+    );
+    register_setting(
+      'workshop_plugin_settings',
+      'dcwps_recipient_firstname',
+      $args
+    );
+  }
+  public function sendParameterSectionHtml()
+  {
+    ?>
+    <div>
+      <h3>Register</h3>
+    </div>
+    <?php
+  }
+
+  public function settingFieldHtml(string $fieldId)
+  {
+    ?>
+    <input type='text' name='<?php echo $fieldId; ?>' value='<?php echo get_option($fieldId); ?>'/>
+    <?php
   }
 }

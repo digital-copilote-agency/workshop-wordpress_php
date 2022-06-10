@@ -1,5 +1,7 @@
 <?php
 
+namespace Workshop\Core;
+
 /**
  * Define the internationalization functionality
  *
@@ -24,24 +26,19 @@
  * @subpackage Wpworkshop/includes
  * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
  */
-class Wpworkshop_i18n {
-
-
-	/**
-	 * Load the plugin text domain for translation.
-	 *
-	 * @since    1.0.0
-	 */
-	public function load_plugin_textdomain() {
-
-		load_plugin_textdomain(
-			'wpworkshop',
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
-
-	}
-
-
-
+class WpWorkshopI18n
+{
+  /**
+   * Load the plugin text domain for translation.
+   *
+   * @since    1.0.0
+   */
+  public function load_plugin_textdomain()
+  {
+    load_plugin_textdomain(
+      'wpworkshop',
+      false,
+      dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
+    );
+  }
 }

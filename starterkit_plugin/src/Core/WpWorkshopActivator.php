@@ -1,4 +1,5 @@
 <?php
+namespace Workshop\Core;
 
 /**
  * Fired during plugin activation
@@ -20,7 +21,7 @@
  * @subpackage Wpworkshop/includes
  * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
  */
-class Wpworkshop_Activator
+class WpWorkshopActivator
 {
   /**
    * Short Description. (use period)

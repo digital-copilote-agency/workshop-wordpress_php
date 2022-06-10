@@ -24,6 +24,11 @@
  * Text Domain:       wpworkshop
  * Domain Path:       /languages
  */
+require __DIR__ . '/vendor/autoload.php';
+
+use Workshop\Core\WpWorkshopActivator;
+use Workshop\Core\WpWorkshopDeactivator;
+use Workshop\Core\WpWorkshop;
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
@@ -43,9 +48,7 @@ define('WPWORKSHOP_VERSION', '1.0.0');
  */
 function activate_wpworkshop()
 {
-  require_once plugin_dir_path(__FILE__) .
-    'includes/class-wpworkshop-activator.php';
-  Wpworkshop_Activator::activate();
+  WpWorkshopActivator::activate();
 }
 
 /**
@@ -54,19 +57,11 @@ function activate_wpworkshop()
  */
 function deactivate_wpworkshop()
 {
-  require_once plugin_dir_path(__FILE__) .
-    'includes/class-wpworkshop-deactivator.php';
-  Wpworkshop_Deactivator::deactivate();
+  WpWorkshopDeactivator::deactivate();
 }
 
 register_activation_hook(__FILE__, 'activate_wpworkshop');
 register_deactivation_hook(__FILE__, 'deactivate_wpworkshop');
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path(__FILE__) . 'includes/class-wpworkshop.php';
 
 /**
  * Begins execution of the plugin.

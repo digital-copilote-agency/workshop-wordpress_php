@@ -1,5 +1,7 @@
 <?php
 
+namespace Workshop\Public;
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -20,7 +22,7 @@
  * @subpackage Wpworkshop/public
  * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
  */
-class Wpworkshop_Public {
+class WpWorkshopPublic {
 
 	/**
 	 * The ID of this plugin.

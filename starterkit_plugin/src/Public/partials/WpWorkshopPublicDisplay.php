@@ -1,5 +1,6 @@
 <?php
 
+namespace Workshop\Public;
 /**
  * Provide a public-facing view for the plugin
  *
