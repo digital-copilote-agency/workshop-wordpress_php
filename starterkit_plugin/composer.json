@@ -1,0 +1,16 @@
+{
+  "name": "workshop/starterkit_plugin",
+  "type": "project",
+  "license": "AGPL",
+  "autoload": {
+    "psr-4": {
+      "Workshop\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Digital Copilote"
+    }
+  ],
+  "require": {}
+}
