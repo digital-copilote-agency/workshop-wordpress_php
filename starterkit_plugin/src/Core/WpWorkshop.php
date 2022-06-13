@@ -1,22 +1,9 @@
 <?php
 namespace Workshop\Core;
 
-use Workshop\Admin\WpWorkshopAdmin;
 use Workshop\Public\WpWorkshopPublic;
-
-
-/**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       https://www.digitalcopilote.io
- * @since      1.0.0
- *
- * @package    Wpworkshop
- * @subpackage Wpworkshop/includes
- */
+use Workshop\Admin\WpWorkshopAdmin;
+// use Workshop\Admin\WpWorkshopAdminHooks;
 
 /**
  * The core plugin class.
@@ -29,7 +16,7 @@ use Workshop\Public\WpWorkshopPublic;
  *
  * @since      1.0.0
  * @package    Wpworkshop
- * @subpackage Wpworkshop/includes
+ * @subpackage Wpworkshop/src/Core
  * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
  */
 class WpWorkshop
@@ -40,7 +27,7 @@ class WpWorkshop
    *
    * @since    1.0.0
    * @access   protected
-   * @var      Wpworkshop_Loader    $loader    Maintains and registers all hooks for the plugin.
+   * @var      WpWorkshopLoader    $loader    Maintains and registers all hooks for the plugin.
    */
   protected $loader;
 
@@ -87,17 +74,10 @@ class WpWorkshop
   }
 
   /**
-   * Load the required dependencies for this plugin.
-   *
-   * Include the following files that make up the plugin:
-   *
-   * - Wpworkshop_Loader. Orchestrates the hooks of the plugin.
-   * - Wpworkshop_i18n. Defines internationalization functionality.
-   * - Wpworkshop_Admin. Defines all hooks for the admin area.
-   * - Wpworkshop_Public. Defines all hooks for the public side of the site.
-   *
    * Create an instance of the loader which will be used to register the hooks
    * with WordPress.
+   * 
+   * Necessary classes are loaded using autoload namespaces.
    *
    * @since    1.0.0
    * @access   private
@@ -136,32 +116,18 @@ class WpWorkshop
    */
   private function define_admin_hooks()
   {
-    $plugin_admin = new WpWorkshopAdmin(
-      $this->get_plugin_name(),
-      $this->get_version()
-    );
+    $pluginAdmin = new WpWorkshopAdmin($this->get_plugin_name(), $this->get_version());
+    $adminHooks = [
+      ['hook' => 'admin_enqueue_scripts', 'callback' => 'enqueue_styles'],
+      ['hook' => 'admin_enqueue_scripts', 'callback' => 'enqueue_scripts'],
+      ['hook' => 'admin_menu', 'callback' => 'addPluginAdminMenu'],
+      ['hook' => 'admin_init', 'callback' => 'registerPluginSettings'],
+    ];
+    // $adminHooks = WpWorkshopAdminHooks::hooks();
 
-    $this->loader->add_action(
-      'admin_enqueue_scripts',
-      $plugin_admin,
-      'enqueue_styles'
-    );
-    $this->loader->add_action(
-      'admin_enqueue_scripts',
-      $plugin_admin,
-      'enqueue_scripts'
-    );
-    $this->loader->add_action(
-      'admin_menu',
-      $plugin_admin,
-      'addPluginAdminMenu'
-    );
-
-    $this->loader->add_action(
-      'admin_init',
-      $plugin_admin,
-      'registerPluginSettings'
-    );
+    foreach($adminHooks as $hookInfos) {
+      $this->loader->add_action($hookInfos['hook'], $pluginAdmin, $hookInfos['callback']);
+    }
   }
 
   /**

@@ -10,17 +10,6 @@ namespace Workshop\Admin;
  * @package    Wpworkshop
  * @subpackage Wpworkshop/admin
  */
-
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    Wpworkshop
- * @subpackage Wpworkshop/admin
- * @author     Digital Copilote <devs.digitalcopilote@gmail.com>
- */
 class WpWorkshopAdmin
 {
   /**
