@@ -3,7 +3,7 @@ name: Open Pull Request
 # only trigger on pull request closed events
 on:
   pull_request:
-    types: [open]
+    types: [opened]
     branches:
       - master
 
