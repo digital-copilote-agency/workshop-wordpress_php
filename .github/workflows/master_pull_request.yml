@@ -1,9 +1,8 @@
-name: Open Pull Request
+name: Pull Request on master branch
 
 # only trigger on pull request closed events
 on:
   pull_request:
-    types: [opened]
     branches:
       - master
 
@@ -12,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
-      - run: echo PR ${{ github.event.number }} has been opened
+      - run: echo "PR ${{ github.event.number }} has been opened on master branch"
