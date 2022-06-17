@@ -19,4 +19,4 @@ jobs:
           echo "PR ${{ github.event.number }} has been opened on master branch"
           echo "The branch name is ${{ github.head_ref }}"
           echo "This PR is opened by ${{ github.event.pull_request.user.login }}"
-          echo "The PR url is https://github.com/${{ github.action_repository }}/pull/${{ github.event.number }}"
+          echo "The PR url is https://github.com/${{ github.repository }}/pull/${{ github.event.number }}"
