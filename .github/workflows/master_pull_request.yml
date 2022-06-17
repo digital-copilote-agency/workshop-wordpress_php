@@ -12,3 +12,4 @@ jobs:
     steps:
       - run: echo PR ${{ github.event.number }} has been opened on master branch
       - run: echo 'The branch name is' ${GITHUB_HEAD_REF}
+      - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}
