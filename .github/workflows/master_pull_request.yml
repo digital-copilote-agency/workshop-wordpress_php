@@ -37,7 +37,7 @@ jobs:
       - name: 'Test Another Github Action on Discord'
         if: ${{ success() }}
         env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         uses: Ilshidur/action-discord@master
         with:
           args: '@${{ secrets.DISCORD_ROLE }}'
