@@ -11,5 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo PR ${{ github.event.number }} has been opened on master branch
-      - run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
-      - run: echo 'The branch name is' $BRANCH_NAME
+      - run: echo 'The branch name is' ${GITHUB_HEAD_REF}
