@@ -34,3 +34,4 @@ jobs:
             **Click [here](https://github.com/${{ github.repository }}/pull/${{ github.event.number }} "GitHub PR link") to review!**
           image: ${{ secrets.EMBED_IMAGE }}
           username: GitHub Actions
+          noprefix: true
