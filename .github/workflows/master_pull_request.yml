@@ -22,14 +22,22 @@ jobs:
           echo "The PR url is https://github.com/${{ github.repository }}/pull/${{ github.event.number }}"
 
       - name: 'Send Event informations to Discord Channel'
+        if: ${{ success() }}
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          title: '@${{ secrets.DISCORD_ROLE }}, an new PR is Opened ✨'
+          title: 'A new PR is Opened on master ✨'
           description: |
-            New PR opened on master branch  
             Branch `${{ github.head_ref }}`
-            Click [here](https://github.com/${{ github.repository }}/pull/${{ github.event.number }}) to review!
+            **Click [here](https://github.com/${{ github.repository }}/pull/${{ github.event.number }}) to review!**
           image: ${{ secrets.EMBED_IMAGE }}
-          color: 680989
           username: GitHub Actions
+          nocontext: true
+
+      - name: 'Test Another Github Action on Discord'
+        if: ${{ success() }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '@${{ secrets.DISCORD_ROLE }}'
