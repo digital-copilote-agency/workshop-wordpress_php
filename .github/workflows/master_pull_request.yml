@@ -20,3 +20,16 @@ jobs:
           echo "The branch name is ${{ github.head_ref }}"
           echo "This PR is opened by ${{ github.event.pull_request.user.login }}"
           echo "The PR url is https://github.com/${{ github.repository }}/pull/${{ github.event.number }}"
+
+      - name: 'Send Event informations to Discord Channel'
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: '@${{ secrets.DISCORD_ROLE }}, an new PR is Opened ✨'
+          description: |
+            New PR opened on master branch  
+            Branch `${{ github.head_ref }}`
+            Click [here](https://github.com/${{ github.repository }}/pull/${{ github.event.number }}) to review!
+          image: ${{ secrets.EMBED_IMAGE }}
+          color: 680989
+          username: GitHub Actions
