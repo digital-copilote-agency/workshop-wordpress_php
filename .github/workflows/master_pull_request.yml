@@ -14,9 +14,11 @@ jobs:
       - name: 'Checkout the code'
         uses: actions/checkout@v2
 
-      - name: 'Display event informations'
+      - name: 'Use kceb/pull-request-url-action@v1'
         uses: kceb/pull-request-url-action@v1
         id: pr-url
+
+      - name: 'Display event informations'
         run: |
           echo PR ${{ github.event.number }} has been opened on master branch
           echo 'The branch name is' ${GITHUB_HEAD_REF}
