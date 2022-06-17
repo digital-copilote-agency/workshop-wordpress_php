@@ -21,6 +21,15 @@ jobs:
           echo "This PR is opened by ${{ github.event.pull_request.user.login }}"
           echo "The PR url is https://github.com/${{ github.repository }}/pull/${{ github.event.number }}"
 
+      - name: 'Test Another Github Action on Discord'
+        if: ${{ success() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_USERNAME: GitHub Actions
+        uses: Ilshidur/action-discord@master
+        with:
+          args: '<@&${{ secrets.DISCORD_ROLE }}>'
+
       - name: 'Send Event informations to Discord Channel'
         if: ${{ success() }}
         uses: sarisia/actions-status-discord@v1
@@ -29,14 +38,6 @@ jobs:
           title: 'A new PR is Opened on master ✨'
           description: |
             Branch `${{ github.head_ref }}`
-            **Click [here](https://github.com/${{ github.repository }}/pull/${{ github.event.number }}) to review!**
+            **Click [PR link on Github](https://github.com/${{ github.repository }}/pull/${{ github.event.number }}) to review!**
           image: ${{ secrets.EMBED_IMAGE }}
           username: GitHub Actions
-
-      - name: 'Test Another Github Action on Discord'
-        if: ${{ success() }}
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: '<@&${{ secrets.DISCORD_ROLE }}>'
