@@ -18,11 +18,11 @@ jobs:
         uses: kceb/pull-request-url-action@v1
         id: pr-url
         env:
-          PR_URL: steps.pr-url.outputs.url
+          PR_URL: echo ${{ steps.pr-url.outputs.url }}
 
       - name: 'Display event informations'
         run: |
           echo "PR ${{ github.event.number }} has been opened on master branch"
           echo "The branch name is ${GITHUB_HEAD_REF}"
-          echo "This PR is opened by ${github.event.pull_request.user.login}"
-          echo "The PR url is ${PR_URL}"
+          echo "This PR is opened by ${{ github.event.pull_request.user.login }}"
+          echo "The PR url is $PR_URL"
