@@ -32,7 +32,6 @@ jobs:
             **Click [here](https://github.com/${{ github.repository }}/pull/${{ github.event.number }}) to review!**
           image: ${{ secrets.EMBED_IMAGE }}
           username: GitHub Actions
-          nocontext: true
 
       - name: 'Test Another Github Action on Discord'
         if: ${{ success() }}
