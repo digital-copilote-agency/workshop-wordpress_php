@@ -8,8 +8,17 @@ on:
 
 jobs:
   master_pr:
+    name: 'PR on Master'
     runs-on: ubuntu-latest
     steps:
-      - run: echo PR ${{ github.event.number }} has been opened on master branch
-      - run: echo 'The branch name is' ${GITHUB_HEAD_REF}
-      - run: echo "This PR is opened by ${{ github.event.pull_request.user.login }}"
+      - name: 'Checkout the code'
+        uses: actions/checkout@v2
+
+      - name: 'Display event informations'
+        uses: kceb/pull-request-url-action@v1
+        id: pr-url
+        run: |
+          echo PR ${{ github.event.number }} has been opened on master branch
+          echo 'The branch name is' ${GITHUB_HEAD_REF}
+          echo "This PR is opened by ${{ github.event.pull_request.user.login }}"
+          echo "The PR url is ${{ steps.pr-url.outputs.url }}"
