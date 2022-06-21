@@ -28,10 +28,9 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          title: '${{ github.event.pull_request.user.login }} opened a PR on master ✨'
+          title: '${{ github.event.pull_request.user.login }} opened a PR on ${{ github.base_ref }} ✨'
           description: |
             Branch `${{ github.head_ref }}`
             **Click [here](https://github.com/${{ github.repository }}/pull/${{ github.event.number }} "GitHub PR link") to review!**
-          image: ${{ secrets.EMBED_IMAGE }}
           username: GitHub Actions
           noprefix: true
